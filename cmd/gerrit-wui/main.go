@@ -4,14 +4,13 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/joho/godotenv"
     "github.com/victorposada/gerrit-wui/internal/web"
-    "github.com/victorposada/gerrit-wui/internal/db"
+	"github.com/victorposada/gerrit-wui/internal/gerrit"
+    //"github.com/victorposada/gerrit-wui/internal/db"
 	"os"
 	//"fmt"
 )
 
-
 func main() {
-
 	err := godotenv.Load()
 	if err != nil {
 		log.Error("Error loading .env file")
@@ -24,9 +23,14 @@ func main() {
 		log.SetLevel(log.InfoLevel)
 	}
 
-	database, _:= db.SetupDBConnection()
+	// repos, _ := gerrit.GetProjects()
+	gerrit.GetChanges()
 
-	db.Insert(database, "users", []string{"id", "name"}, []string{"3", "'bar'"})
+	//print(repos)
+
+	// database, _:= db.SetupDBConnection()
+
+	// db.Insert(database, "users", []string{"id", "name"}, []string{"3", "'bar'"})
 
 
 	// err := database.InitDB("user:password@tcp(localhost:3306)/dbname")
