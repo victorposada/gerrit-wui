@@ -1,4 +1,4 @@
-module gerrit-wui
+module github.com/victorposada/gerrit-wui
 
 go 1.24.0
 
