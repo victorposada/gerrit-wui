@@ -1,24 +1,33 @@
 package main
 
 import (
-    "log"
+	log "github.com/sirupsen/logrus"
 	"github.com/joho/godotenv"
-    "github.com/victorposada/gerrit-wui/internal/server"
-    // "github.com/victorposada/gerrit-wui/internal/database"
+    "github.com/victorposada/gerrit-wui/internal/web"
+    "github.com/victorposada/gerrit-wui/internal/db"
+	"os"
+	//"fmt"
 )
+
 
 func main() {
 
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Error("Error loading .env file")
 	}
 
-	// DB_HOST := os.Getenv("DB_HOST")
-	// DB_PORT := os.Getenv("DB_PORT")
-	// DB_USER := os.Getenv("DB_USER")
-	// DB_PASS := os.Getenv("DB_PASS")
-	// DB_NAME := os.Getenv("DB_NAME")
+	switch os.Getenv("LOG_LEVEL") {
+	case "debug":
+		log.SetLevel(log.DebugLevel)
+	default:
+		log.SetLevel(log.InfoLevel)
+	}
+
+	database, _:= db.SetupDBConnection()
+
+	db.Insert(database, "users", []string{"id", "name"}, []string{"3", "'bar'"})
+
 
 	// err := database.InitDB("user:password@tcp(localhost:3306)/dbname")
 	// if err != nil {
@@ -28,5 +37,5 @@ func main() {
 	// insert(db, "users", []string{"id", "name"}, []string{"2", "'bar'"})
 
 	// Start the server
-	server.StartServer()
+	web.StartServer()
 }
