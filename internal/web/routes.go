@@ -1,17 +1,39 @@
 package web
 
 import (
-	"fmt"
+	//"fmt"
+	"html/template"
 	"io"
-    "net/http"
+	"net/http"
+	"os"
+
+	log "github.com/sirupsen/logrus"
+	"github.com/victorposada/gerrit-wui/internal/gerrit"
 )
 
-func getRoot(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("got / request\n")
-	io.WriteString(w, "This is my website!\n")
+type Change struct {
+    Title string
+    Done  bool
+}
+type TemplateData struct {
+	GerritURL string
+	Changes   interface{}
 }
 
-func getHello(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("got /hello request\n")
+func getRoot(w http.ResponseWriter, r *http.Request) {
+	GERRIT_URL := os.Getenv("GERRIT_URL")
+	tmpl := template.Must(template.ParseFiles("templates/main.html"))
+	log.Info("got / request")
+	changes := gerrit.GetChanges()
+
+	data := TemplateData{
+		GerritURL: GERRIT_URL,
+		Changes:   changes,
+	}
+	tmpl.Execute(w, data)
+}
+
+func getInfo(w http.ResponseWriter, r *http.Request) {
+	log.Info("got /info request")
 	io.WriteString(w, "Hello, HTTP!\n")
 }

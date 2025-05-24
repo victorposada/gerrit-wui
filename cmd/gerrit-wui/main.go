@@ -4,7 +4,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/joho/godotenv"
     "github.com/victorposada/gerrit-wui/internal/web"
-	"github.com/victorposada/gerrit-wui/internal/gerrit"
+	//"github.com/victorposada/gerrit-wui/internal/gerrit"
     //"github.com/victorposada/gerrit-wui/internal/db"
 	"os"
 	//"fmt"
@@ -24,7 +24,7 @@ func main() {
 	}
 
 	// repos, _ := gerrit.GetProjects()
-	gerrit.GetChanges()
+	// changes := gerrit.GetChanges()
 
 	//print(repos)
 

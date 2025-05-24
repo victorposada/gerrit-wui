@@ -3,14 +3,16 @@ package web
 import (
     "net/http"
 	log "github.com/sirupsen/logrus"
+	"os"
 )
 
 func StartServer() {
+	SERVER_PORT := os.Getenv("SERVER_PORT")
 	http.HandleFunc("/", getRoot)
-	http.HandleFunc("/hello", getHello)
-	log.Debug("failed to fetch URL: http://example.com")
+	http.HandleFunc("/info", getInfo)
+	log.Info("failed to fetch URL: http://localhost:" + SERVER_PORT + "")
 	// Start the server on port 3333
-	if err := http.ListenAndServe(":3333", nil); err != nil {
+	if err := http.ListenAndServe(":"+ SERVER_PORT, nil); err != nil {
 		panic(err)
 	}
 }

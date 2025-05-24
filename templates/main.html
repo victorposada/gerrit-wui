@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cambios</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #18181b;
+            color: #e4e4e7;
+            margin: 0;
+            padding: 40px;
+            min-height: 100vh;
+            letter-spacing: 0.03em;
+        }
+        h1 {
+            color: #f5f5f5;
+            margin-bottom: 32px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border-bottom: 2px solid #fff;
+            display: inline-block;
+            padding-bottom: 6px;
+        }
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 90%;
+            margin: 40px auto 0 auto;
+            background: #23232a;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 16px 22px;
+            text-align: left;
+        }
+        th {
+            background: #1a1a20;
+            color: #fffb00;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #fffb00;
+            text-shadow: 0 1px 0 #000;
+        }
+        td {
+            border-bottom: 1px solid #282830;
+            font-size: 1rem;
+        }
+        tr:nth-child(even) td {
+            background: #23232a;
+        }
+        tr:nth-child(odd) td {
+            background: #1e1e24;
+        }
+        tr:hover td {
+            background: #fffb00;
+            color: #18181b;
+        }
+        @media (max-width: 800px) {
+            table, th, td {
+                font-size: 0.95rem;
+            }
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Change list</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Project</th>
+            <th>Subject</th>
+        </tr>
+        {{range .Changes}}
+        <tr>
+            <td><a href="{{$.GerritURL}}/c/{{.Project}}/+/{{.ID}}">{{.ID}}</a></td>
+            <td>{{.Project}}</td>
+            <td>{{.Subject}}</td>
+        </tr>
+        {{end}}
+    </table>
+</body>
+</html>

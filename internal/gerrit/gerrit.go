@@ -1,7 +1,7 @@
 package gerrit
 
 import (
-	//"encoding/json"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -16,19 +16,32 @@ type Project struct {
 }
 
 type Change struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID       int    `json:"_number"`
+	Project  string `json:"project"`
+	//Branch   string `json:"branch"`
+	ChangeID string `json:"change_id"`
+	Subject  string `json:"subject"`
 }
-
 
 // func GetProjects() (map[string]Repositorio, error) {
 // 	repos, err := GetRequest("a/projects/")
 // 	return repos, err
 // }
 
-func GetChanges(){
-	changes, _ := GetRequest("a/changes/?q=status:open+limit:1")
-	fmt.Println(changes)
+func GetChanges() (change_list []Change) {
+	data, _ := GetRequest("/a/changes/?q=status:open+limit:20")
+
+	var changes []Change
+	if err := json.Unmarshal([]byte(data), &changes); err != nil {
+		log.Info("Error parsing JSON:", err)
+		return
+	}
+
+	for _, change := range changes {
+		fmt.Println(change)
+	}
+
+	return changes
 }
 
 func GetRequest(path string) (body string, err error) {
