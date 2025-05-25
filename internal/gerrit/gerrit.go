@@ -2,7 +2,6 @@ package gerrit
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -15,8 +14,8 @@ import (
 // 	return repos, err
 // }
 
-func GetChanges() (change_list []Change) {
-	data, _ := GetRequest("/a/changes/?q=status:open+limit:20")
+func GetChanges(query string) (change_list []Change) {
+	data, _ := GetRequest("/a/changes/?q=" + query)
 
 	var changes []Change
 	if err := json.Unmarshal([]byte(data), &changes); err != nil {
@@ -24,9 +23,9 @@ func GetChanges() (change_list []Change) {
 		return
 	}
 
-	for _, change := range changes {
-		fmt.Println(change)
-	}
+	// for _, change := range changes {
+	// 	fmt.Println(change)
+	// }
 
 	return changes
 }

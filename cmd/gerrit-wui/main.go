@@ -6,7 +6,7 @@ import (
     "github.com/victorposada/gerrit-wui/internal/web"
 	//"github.com/victorposada/gerrit-wui/internal/gerrit"
 	"os"
-	//"fmt"
+
 )
 
 func main() {
@@ -26,6 +26,6 @@ func main() {
 	// changes := gerrit.GetChanges()
 
 	//print(repos)
-
+	log.Debug("Pre web-server")
 	web.StartServer()
 }
