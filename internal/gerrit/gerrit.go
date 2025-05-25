@@ -51,6 +51,10 @@ func GetRequest(path string) (body string, err error) {
 	}
 	defer resp.Body.Close()
 
+	log.Debug(resp.Body)
+	log.Debug(resp.StatusCode)
+	log.Debug(resp)
+
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
@@ -58,5 +62,8 @@ func GetRequest(path string) (body string, err error) {
 
 	bodyStr := string(bodyBytes)
 	bodyStr = strings.TrimPrefix(bodyStr, ")]}'\n")
+
+	log.Debug("HTTP response body: " + bodyStr)
+
 	return bodyStr, err
 }
