@@ -1,1 +1,4 @@
 .env
+.gitsecret/keys/random_seed
+!*.secret
+values-pre.yml
