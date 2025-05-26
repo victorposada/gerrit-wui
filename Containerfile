@@ -1,7 +1,7 @@
 FROM golang:1.24-alpine
 
 LABEL org.opencontainers.image.source=https://github.com/victorposada/gerrit-wui
-
+LABEL org.opencontainers.image.source https://github.com/victorposada/gerrit-wui
 
 WORKDIR /app
 
