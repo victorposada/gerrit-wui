@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <h1>Board list</h1>
+    <h1>Change list</h1>
     <table>
         <tr>
             <th>ID</th>
-            <th>Description</th>
-            <th>Query</th>
-            <th>Custom field</th>
+            <th>Project</th>
+            <th>Subject</th>
+            <th>QA Env</th>
         </tr>
-        {{range .Boards}}
+        {{range .Changes}}
         <tr>
-            <td><a href="">{{.ID}}</a></td>
-            <td>{{.Description}}</td>
-            <td>{{.Query}}</td>
-            <td>{{.Custom_field}}</td>
+            <td><a href="{{$.GerritURL}}/c/{{.Project}}/+/{{.ID}}">{{.ID}}</a></td>
+            <td>{{.Project}}</td>
+            <td>{{.Subject}}</td>
+            <td><a href="https://{{.ID}}.qa.svc-pre.teimas.com">link</a></td>
         </tr>
         {{end}}
     </table>

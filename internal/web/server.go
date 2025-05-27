@@ -14,7 +14,7 @@ func StartServer() {
 	for _, board := range strings.Split(boards, ",") {
 		http.HandleFunc("/" + board, getBoard(board))
 	}
-	http.HandleFunc("/", getRoot)
+	http.HandleFunc("/", getBoards)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	if err := http.ListenAndServe(":"+ SERVER_PORT, nil); err != nil {
 		panic(err)
