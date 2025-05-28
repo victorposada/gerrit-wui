@@ -17,10 +17,10 @@
         </tr>
         {{range .Boards}}
         <tr>
-            <td><a href="">{{.ID}}</a></td>
+            <td><a href="/{{.ID}}">{{.ID}}</a></td>
             <td>{{.Description}}</td>
             <td>{{.Query}}</td>
-            <td>{{.Custom_field}}</td>
+            <td>{{.CustomFieldName}}</td>
         </tr>
         {{end}}
     </table>
